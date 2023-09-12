@@ -16,7 +16,6 @@ public class OpenDoor : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isTrigger = true;
-            Debug.Log("EntexTrigerZone");
         }
     }
     private void OnTriggerExit(Collider other)
@@ -24,7 +23,6 @@ public class OpenDoor : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isTrigger = false;
-            Debug.Log("ExitTrigerZone");
         }
     }
 
