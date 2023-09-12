@@ -438,7 +438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3252330372877214158, guid: 15a5216adc1872d41ab44e7f5fb48143, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3900791613493919771, guid: 15a5216adc1872d41ab44e7f5fb48143, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194229}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

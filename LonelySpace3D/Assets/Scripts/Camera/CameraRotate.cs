@@ -10,7 +10,6 @@ public class CameraRotate : MonoBehaviour
     [Header("Settings mouse")]
     [SerializeField] private float sensitivity = 2.0f; // Чувствительность мыши
     [SerializeField] private float smoothing = 2.0f; // Сглаживание движения камеры
-
     [Header("Layers")]
     [SerializeField] private LayerMask collisionLayer; // Слои для блокирования движения камеры сквозь объекты
     [SerializeField] private float collisionOffset = 0.2f;
@@ -40,10 +39,9 @@ public class CameraRotate : MonoBehaviour
         transform.localRotation = ClampRotation(transform.localRotation);
 
         // Расстояние от персонажа
-        Vector3 desiredPosition = target.position - transform.forward * 3.0f;
-
-        // Проверяем коллизии
-        CheckCollisions(desiredPosition);
+        Vector3 desiredPosition = target.position - transform.forward * 2f;
+        
+        CheckCollisions(ref desiredPosition);
 
         // Применяем новую позицию
         transform.position = desiredPosition;
@@ -64,11 +62,11 @@ public class CameraRotate : MonoBehaviour
 
         return rotation;
     }
-    private void CheckCollisions(Vector3 desiredPosition)
-    {
-        RaycastHit hit;
 
-        if (Physics.Linecast(target.position, desiredPosition, out hit, collisionLayer))
+    private void CheckCollisions(ref Vector3 desiredPosition)
+    {
+
+        if (Physics.Linecast(target.position, desiredPosition, out RaycastHit hit, collisionLayer))
         {
             // Если есть коллизия, корректируем позицию камеры
             desiredPosition = hit.point + hit.normal * collisionOffset;
