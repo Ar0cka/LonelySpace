@@ -12,5 +12,7 @@ public interface ICharacterAttributes
     int stealth { get; set; }
     int garden { get; set; }
 
+    int point { get; set; }
+
     void BeginAttributes();
 }

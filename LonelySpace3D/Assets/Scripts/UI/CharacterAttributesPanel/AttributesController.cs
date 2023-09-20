@@ -13,6 +13,8 @@ public class AttributesController : MonoBehaviour
     [SerializeField] private Button[] buttonMines = new Button[6];
     [SerializeField] private Button[] buttonPlus = new Button[6];
 
+    [SerializeField] private TextMeshProUGUI pointQuality;
+
     private void Awake()
     {
         characterAttributes = CharacterAttributesSingleton.Instance.CharacterAttributes;
@@ -20,6 +22,8 @@ public class AttributesController : MonoBehaviour
 
     private void Start()
     {
+        pointQuality.text = "Quality point: " + characterAttributes.point;
+
         // Инициализация массивов текстовых полей и кнопок
         for (int i = 0; i < 6; i++)
         {
@@ -40,8 +44,10 @@ public class AttributesController : MonoBehaviour
         {
             textAttributes[i].text = $"{GetAttributeValue(i)}";
         }
-        Debug.Log("Сила " + characterAttributes.strength + " Ловкость " + characterAttributes.agility + " интелект " + characterAttributes.intelligence + " крафт " + characterAttributes.craft + " скрытность " +
+        Debug.Log("Сила " + characterAttributes.strength + " Ловкость " + characterAttributes.agility + " интеллект " + characterAttributes.intelligence + " крафт " + characterAttributes.craft + " скрытность " +
            characterAttributes.stealth + " садоводство " + characterAttributes.garden);
+
+        pointQuality.text = "Quality point: " + characterAttributes.point;
     }
 
     private int GetAttributeValue(int index)
@@ -61,37 +67,45 @@ public class AttributesController : MonoBehaviour
 
     private void IncreaseAttribute(int index)
     {
-        // Метод для увеличения атрибута по индексу
-        switch (index)
+        if (characterAttributes.point > 0)
         {
-            case 0:
-                characterAttributes.strength += 1;
-                Debug.Log("Нажата"); break;
-            case 1: characterAttributes.agility+= 1; break;
-            case 2: characterAttributes.intelligence += 1; break;
-            case 3: characterAttributes.craft+= 1; break;
-            case 4: characterAttributes.stealth += 1; break;
-            case 5: characterAttributes.garden += 1; break;
+            switch (index)
+            {
+                case 0: characterAttributes.strength += 1;
+                    characterAttributes.point -= 1;  break;
+                case 1: characterAttributes.agility += 1;
+                    characterAttributes.point -= 1; break;
+                case 2: characterAttributes.intelligence += 1;
+                    characterAttributes.point -= 1; break;
+                case 3: characterAttributes.craft += 1;
+                    characterAttributes.point -= 1; break;
+                case 4: characterAttributes.stealth += 1;
+                    characterAttributes.point -= 1; break;
+                case 5: characterAttributes.garden += 1;
+                    characterAttributes.point -= 1; break;
+            }
         }
-
         UpdateUI();
     }
 
     private void DecreaseAttribute(int index)
     {
-        // Метод для уменьшения атрибута по индексу
-        switch (index)
-        {
-            case 0:
-                characterAttributes.strength -= 1;
-                Debug.Log("Нажата"); break;
-            case 1: characterAttributes.agility -= 1; break;
-            case 2: characterAttributes.intelligence -= 1; break;
-            case 3: characterAttributes.craft-= 1; break;
-            case 4: characterAttributes.stealth -= 1; break;
-            case 5: characterAttributes.garden -= 1; break;
-        }
+       switch (index) // Уменьшение атрибута в зависимости от индекса
+       {
+           case 0: characterAttributes.strength -= 1;
+                characterAttributes.point += 1; break;
+           case 1: characterAttributes.agility -= 1;
+                characterAttributes.point += 1; break;
+           case 2: characterAttributes.intelligence -= 1;
+                characterAttributes.point += 1; break;
+           case 3: characterAttributes.craft -= 1;
+                characterAttributes.point += 1; break;
+           case 4: characterAttributes.stealth -= 1;
+                characterAttributes.point += 1; break;
+           case 5: characterAttributes.garden -= 1;
+                characterAttributes.point += 1; break;
+       }
 
-        UpdateUI();
+       UpdateUI();
     }
 }

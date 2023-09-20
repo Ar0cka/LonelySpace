@@ -11,13 +11,16 @@ public class CharacterAttributes : ICharacterAttributes
     public int stealth { get; set; }
     public int garden { get; set; }
 
+    public int point { get; set; }
+
     public void BeginAttributes()
     {
-        strength = 1;
-        agility = 2;
-        intelligence = 4;
-        craft = 3; 
-        stealth = 5; 
-        garden = 3;
+        point = 10;
+        strength = 0;
+        agility = 0;
+        intelligence = 0;
+        craft = 0; 
+        stealth = 0; 
+        garden = 0;
     }
 }
