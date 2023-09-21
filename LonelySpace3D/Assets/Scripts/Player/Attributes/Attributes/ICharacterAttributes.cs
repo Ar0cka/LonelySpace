@@ -5,14 +5,20 @@ using UnityEngine;
 
 public interface ICharacterAttributes
 {
-    int strength { get; set; }
-    int agility { get; set; }
-    int intelligence { get; set; }
-    int craft { get; set; }
-    int stealth { get; set; }
-    int garden { get; set; }
+    int Strength { get; }
+    int Agility { get; }
+    int Intelligence { get; }
+    int Craft { get; }
+    int Stealth { get; }
+    int Garden { get;}
 
     int point { get; set; }
 
     void BeginAttributes();
+
+    void IncreaseAttribute(int index);
+    void DecreaseAttribute(int index);
+
+    void SaveCharacterData (CharacterAttributesData characterData);
+    void LoadCharacterData(CharacterAttributesData characterData);
 }

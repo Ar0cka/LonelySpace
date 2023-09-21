@@ -3,27 +3,40 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class AttributesController : MonoBehaviour
 {
-    private ICharacterAttributes characterAttributes;
-
-    // Массивы для хранения текстовых полей и кнопок
+    [Inject] private ICharacterAttributes characterAttributes;
+    #region Serialize
+    [Header("TextMeshPro")]
     [SerializeField] private TextMeshProUGUI[] textAttributes = new TextMeshProUGUI[6];
+    [SerializeField] private TextMeshProUGUI pointQuality;
+    [Header("Buttons")]
     [SerializeField] private Button[] buttonMines = new Button[6];
     [SerializeField] private Button[] buttonPlus = new Button[6];
 
-    [SerializeField] private TextMeshProUGUI pointQuality;
 
+    #endregion
+    #region AddListener and CharacterAttributsInitialize 
     private void Awake()
-    {
-        characterAttributes = CharacterAttributesSingleton.Instance.CharacterAttributes;
+    { 
+        string jsonData = PlayerPrefs.GetString("CharacterAttributesData", "");
+        if (!string.IsNullOrEmpty(jsonData))
+        {
+            CharacterAttributesData data = JsonUtility.FromJson<CharacterAttributesData>(jsonData);
+            characterAttributes.LoadCharacterData(data);
+        }
+        Debug.Log("Сила " + characterAttributes.Strength + " Ловкость " + characterAttributes.Agility + " интеллект " + characterAttributes.Intelligence + " крафт " + characterAttributes.Craft + " скрытность " +
+   characterAttributes.Stealth + " садоводство " + characterAttributes.Garden);
+
+        UpdateUI();
+
+        pointQuality.text = "Quality point: " + characterAttributes.point;
     }
 
     private void Start()
     {
-        pointQuality.text = "Quality point: " + characterAttributes.point;
-
         // Инициализация массивов текстовых полей и кнопок
         for (int i = 0; i < 6; i++)
         {
@@ -31,12 +44,10 @@ public class AttributesController : MonoBehaviour
             int index = i; // Создаем локальную переменную, чтобы избежать замыкания
             buttonPlus[i].onClick.AddListener(() => IncreaseAttribute(index));
             buttonMines[i].onClick.AddListener(() => DecreaseAttribute(index));
-        }
-
-        // Обновление интерфейса при запуске
-        UpdateUI();
+        }  
     }
-
+    #endregion
+    #region UpdateUI
     private void UpdateUI()
     {
         // Обновление текстовых полей для отображения текущих значений атрибутов
@@ -44,9 +55,6 @@ public class AttributesController : MonoBehaviour
         {
             textAttributes[i].text = $"{GetAttributeValue(i)}";
         }
-        Debug.Log("Сила " + characterAttributes.strength + " Ловкость " + characterAttributes.agility + " интеллект " + characterAttributes.intelligence + " крафт " + characterAttributes.craft + " скрытность " +
-           characterAttributes.stealth + " садоводство " + characterAttributes.garden);
-
         pointQuality.text = "Quality point: " + characterAttributes.point;
     }
 
@@ -55,57 +63,36 @@ public class AttributesController : MonoBehaviour
         // Метод для получения значения атрибута по индексу
         switch (index)
         {
-            case 0: return characterAttributes.strength;
-            case 1: return characterAttributes.agility;
-            case 2: return characterAttributes.intelligence;
-            case 3: return characterAttributes.craft;
-            case 4: return characterAttributes.stealth;
-            case 5: return characterAttributes.garden;
+            case 0: return characterAttributes.Strength;
+            case 1: return characterAttributes.Agility;
+            case 2: return characterAttributes.Intelligence;
+            case 3: return characterAttributes.Craft;
+            case 4: return characterAttributes.Stealth;
+            case 5: return characterAttributes.Garden;
             default: return 0;
         }
     }
-
+    #endregion
+    #region Increase and decrease Attributes
     private void IncreaseAttribute(int index)
     {
-        if (characterAttributes.point > 0)
-        {
-            switch (index)
-            {
-                case 0: characterAttributes.strength += 1;
-                    characterAttributes.point -= 1;  break;
-                case 1: characterAttributes.agility += 1;
-                    characterAttributes.point -= 1; break;
-                case 2: characterAttributes.intelligence += 1;
-                    characterAttributes.point -= 1; break;
-                case 3: characterAttributes.craft += 1;
-                    characterAttributes.point -= 1; break;
-                case 4: characterAttributes.stealth += 1;
-                    characterAttributes.point -= 1; break;
-                case 5: characterAttributes.garden += 1;
-                    characterAttributes.point -= 1; break;
-            }
-        }
-        UpdateUI();
+            characterAttributes.IncreaseAttribute(index);
+            UpdateUI();
     }
 
     private void DecreaseAttribute(int index)
     {
-       switch (index) // Уменьшение атрибута в зависимости от индекса
-       {
-           case 0: characterAttributes.strength -= 1;
-                characterAttributes.point += 1; break;
-           case 1: characterAttributes.agility -= 1;
-                characterAttributes.point += 1; break;
-           case 2: characterAttributes.intelligence -= 1;
-                characterAttributes.point += 1; break;
-           case 3: characterAttributes.craft -= 1;
-                characterAttributes.point += 1; break;
-           case 4: characterAttributes.stealth -= 1;
-                characterAttributes.point += 1; break;
-           case 5: characterAttributes.garden -= 1;
-                characterAttributes.point += 1; break;
-       }
+            characterAttributes.DecreaseAttribute(index);
+            UpdateUI();
+    }
+    #endregion
+    public void CharacterAttributesUpdate()
+    {
+        CharacterAttributesData data = new CharacterAttributesData();
+        characterAttributes.SaveCharacterData(data);
 
-       UpdateUI();
+        string JsonData = JsonUtility.ToJson(data);
+        PlayerPrefs.SetString("CharacterAttributesData", JsonData);
+        PlayerPrefs.Save();
     }
 }

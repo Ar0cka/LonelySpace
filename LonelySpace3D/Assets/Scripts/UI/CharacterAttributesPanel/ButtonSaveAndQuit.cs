@@ -6,14 +6,19 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class ButtonSaveAndQuit : MonoBehaviour
 {
+    [Header("Panel")]
     [SerializeField] private GameObject panel;
 
+    [Header("Button")]
     [SerializeField] private Button showSavePanel;
-
     [SerializeField] private Button saveAttributes;
     [SerializeField] private Button closePanel;
 
+    [Header("Scene")]
     [SerializeField] private string mainScene;
+
+    [Header("CharacterAttributes")]
+    [SerializeField] private AttributesController attributesController; 
 
     private void Start()
     {
@@ -31,7 +36,7 @@ public class ButtonSaveAndQuit : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            SaveAttributes();   
+            ShowPanel();   
         }
     }
 
@@ -42,9 +47,11 @@ public class ButtonSaveAndQuit : MonoBehaviour
 
     private void SaveAttributes()
     {
-        SceneManager.LoadScene(mainScene);
+        attributesController.CharacterAttributesUpdate();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        SceneManager.LoadScene(mainScene);
+
     }
 
     private void ClosePanel()

@@ -2,21 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
 public class CharacterManager : MonoBehaviour
 {
-   private ICharacterAttributes characterAttributes;
-
-    private void Awake()
-    {
-        CharacterAttributesSingleton.Instance.CharacterAttributes = new CharacterAttributes();
-        characterAttributes = CharacterAttributesSingleton.Instance.CharacterAttributes;
-    }
+   [Inject] private ICharacterAttributes characterAttributes;
 
     private void Start()
     {
-        characterAttributes.BeginAttributes();
-        Debug.Log("Сила " + characterAttributes.strength + " Ловкость " + characterAttributes.agility + " Интеллект " + characterAttributes.intelligence +
-            " Скрытность " + characterAttributes.stealth + " Садоводство " + characterAttributes.garden);
+        //characterAttributes.BeginAttributes();
     }
 }
