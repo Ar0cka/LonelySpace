@@ -19,21 +19,6 @@ public class AttributesController : MonoBehaviour
 
     #endregion
     #region AddListener and CharacterAttributsInitialize 
-    private void Awake()
-    { 
-        string jsonData = PlayerPrefs.GetString("CharacterAttributesData", "");
-        if (!string.IsNullOrEmpty(jsonData))
-        {
-            CharacterAttributesData data = JsonUtility.FromJson<CharacterAttributesData>(jsonData);
-            characterAttributes.LoadCharacterData(data);
-        }
-        Debug.Log("Сила " + characterAttributes.Strength + " Ловкость " + characterAttributes.Agility + " интеллект " + characterAttributes.Intelligence + " крафт " + characterAttributes.Craft + " скрытность " +
-   characterAttributes.Stealth + " садоводство " + characterAttributes.Garden);
-
-        UpdateUI();
-
-        pointQuality.text = "Quality point: " + characterAttributes.point;
-    }
 
     private void Start()
     {
@@ -86,13 +71,4 @@ public class AttributesController : MonoBehaviour
             UpdateUI();
     }
     #endregion
-    public void CharacterAttributesUpdate()
-    {
-        CharacterAttributesData data = new CharacterAttributesData();
-        characterAttributes.SaveCharacterData(data);
-
-        string JsonData = JsonUtility.ToJson(data);
-        PlayerPrefs.SetString("CharacterAttributesData", JsonData);
-        PlayerPrefs.Save();
-    }
 }

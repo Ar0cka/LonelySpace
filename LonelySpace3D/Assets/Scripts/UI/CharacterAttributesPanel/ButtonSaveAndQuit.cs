@@ -47,7 +47,6 @@ public class ButtonSaveAndQuit : MonoBehaviour
 
     private void SaveAttributes()
     {
-        attributesController.CharacterAttributesUpdate();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         SceneManager.LoadScene(mainScene);
