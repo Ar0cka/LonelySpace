@@ -111,7 +111,7 @@ public class CharacterAttributes : ICharacterAttributes
     #endregion
 
     #region SaveAndLoadCharacterData
-    public void SaveCharacterData(CharacterAttributesData characterData)
+    public void SaveCharacterData(GameData characterData)
     {
         characterData.strength = strength;
         characterData.agility = agility;
@@ -121,7 +121,7 @@ public class CharacterAttributes : ICharacterAttributes
         characterData.garden = garden;  
         characterData.point = point;
     }
-    public void LoadCharacterData(CharacterAttributesData characterData)
+    public void LoadCharacterData(GameData characterData)
     {
         strength = characterData.strength;
         agility = characterData.agility;    

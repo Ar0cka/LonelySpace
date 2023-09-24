@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,70 +9,67 @@ using Zenject;
 
 public class MenuController : MonoBehaviour
 {
-    [SerializeField] string _mainScene;
-    #region initial
-    [Inject] ICharacterAttributes characterAttributes;
+    [Header("Scene")]
+    [SerializeField] public string _mainScene;
+
+    [Inject] ISlotSaved slotSaved;
+
     private SaveManager saveManager;
-    #endregion
+
+    [HideInInspector]
+    public string[] slotName = new string[3];
+
     #region LoadAndSaveButton
     [Header ("Button menu")]
     [SerializeField] Button _loadGame;
     [SerializeField] Button _newGame;
     #endregion
 
-    #region panelSaveAndLoad
-    [Header("Panel save and load")]
-    [SerializeField] GameObject _panelLoadAdnSave;
-    [SerializeField] Button[] _panelSaveButton = new Button[3];
+    #region Panels
+    [Header("Panel save")]
+    [SerializeField] GameObject _panelSave;
+    [Header("Panel load")]
+    [SerializeField] GameObject _panelLoadGame;
     #endregion
-
-
-    private void Start()
+    private void Awake()
     {
         saveManager = GetComponent<SaveManager>();
+        saveManager.LoadToFileSlotData("SlotData.txt");
+    }
+    private void Start()
+    {
 
-        _loadGame.onClick.AddListener(ClickNewGameAndLoadGame);
-        _newGame.onClick.AddListener(ClickNewGameAndLoadGame);
+        _loadGame.onClick.AddListener(OpenLoadPanel);
+        _newGame.onClick.AddListener(ClickNewGame);
 
         _loadGame.interactable = false;
-        _panelLoadAdnSave.SetActive(false);
-    }
-    #region OnEnabledOrOnDisableMenu
-    private void OnEnable()
-    {
-        for (int i = 0; i < 3; i++)
+        _panelSave.SetActive(false);
+        _panelLoadGame.SetActive(false);
+
+        for (int i = 0; i < slotName.Length; i++)
         {
-            int index = i;
-            _panelSaveButton[i].onClick.AddListener(() => SaveButtons(index));
-        }
+            slotName[i] = "Slot" + (i + 1);
+        }   
     }
 
-    private void OnDisable()
+    private void Update()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            _panelSaveButton[i].onClick.RemoveAllListeners();
-        }
+        if (slotSaved.slot1Saved || slotSaved.slot2Saved || slotSaved.slot3Saved) _loadGame.interactable = true;
+    }
+
+    #region panelSaveGame
+    private void ClickNewGame()
+    {
+        _panelSave.SetActive (true);
     }
     #endregion
-    private void ClickNewGameAndLoadGame()
+
+    #region LoadGamePanel
+
+
+    private void OpenLoadPanel()
     {
-        _panelLoadAdnSave.SetActive (true);
+        _panelLoadGame.SetActive(true);
     }
-
-    private void SaveButtons(int index)
-    {
-        characterAttributes.BeginAttributes();
-        CharacterAttributesData data = new CharacterAttributesData();
-        characterAttributes.SaveCharacterData(data);
-
-        switch (index)
-        {
-            case 0: saveManager.SaveToFile("Slot1.txt", data); break;
-            case 1: saveManager.SaveToFile("Slot2.txt", data); break;
-            case 2: saveManager.SaveToFile("Slot3.txt", data); break;
-        }
-
-        SceneManager.LoadScene(_mainScene);
-    }
+    #endregion
 }
