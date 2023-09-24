@@ -33,14 +33,9 @@ public class Load : MonoBehaviour
 
     private void Update()
     {
-        if (slotSaved.slot1Saved) _loadSave[0].interactable = true;
-        else _loadSave[0].interactable = false;
-
-        if (slotSaved.slot2Saved) _loadSave[1].interactable = true;
-        else _loadSave[0].interactable = false;
-
-        if (slotSaved.slot3Saved) _loadSave[2].interactable = true;
-        else _loadSave[0].interactable = false;
+        _loadSave[0].interactable = slotSaved.slot1Saved;
+        _loadSave[1].interactable = slotSaved.slot2Saved;
+        _loadSave[2].interactable = slotSaved.slot3Saved;
     }
     private void LoadGame(int index)
     {

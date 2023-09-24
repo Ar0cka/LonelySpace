@@ -11,4 +11,7 @@ public interface ISlotSaved
     void CheckSlot(string fileName);
 
     void GetTrue(int index);
+    void GetFalse(int index);
+
+    void SaveDataSlot(SlotSavedData slotSavedData);
 }

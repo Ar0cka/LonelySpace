@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -34,7 +35,16 @@ public class MenuController : MonoBehaviour
     private void Awake()
     {
         saveManager = GetComponent<SaveManager>();
-        saveManager.LoadToFileSlotData("SlotData.txt");
+        try
+        {
+            SlotSavedData slotSavedData = saveManager.LoadToFileSlotData("SlotData.txt");
+            slotSaved.SaveDataSlot(slotSavedData);
+            Debug.Log("Slot1 " + slotSaved.slot1Saved + " Slot 2 " + slotSaved.slot2Saved + " Slot 3 " + slotSaved.slot3Saved);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
     }
     private void Start()
     {

@@ -36,4 +36,20 @@ public class SlotSaved : ISlotSaved
             case 2: _slot3Saved = true; break;    
         }
     }
+    public void GetFalse(int index) 
+    {
+        switch (index)
+        {
+            case 0: _slot1Saved = false; break;
+            case 1: _slot2Saved = false; break;
+            case 2: _slot3Saved = false; break;
+        }
+    }
+
+    public void SaveDataSlot(SlotSavedData slot)
+    {
+        _slot1Saved = slot.slot1Saved;
+        _slot2Saved = slot.slot2Saved;
+        _slot3Saved = slot.slot3Saved;
+    }
 }
