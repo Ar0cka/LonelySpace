@@ -19,6 +19,6 @@ public interface ICharacterAttributes
     void IncreaseAttribute(int index);
     void DecreaseAttribute(int index);
 
-    void SaveCharacterData (GameData characterData);
-    void LoadCharacterData(GameData characterData);
+    void SaveCharacterData (CharacterData characterData); 
+    void LoadCharacterData(CharacterData characterData);
 }

@@ -42,7 +42,6 @@ public class Generator : MonoBehaviour
 
     private void OnGeneration()
     {
-        int generator = 1;
         isGeneratorActivated = true;
     }
 }

@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Zenject;
+
 public class ButtonSaveAndQuit : MonoBehaviour
 {
     [Header("Panel")]
@@ -18,8 +20,16 @@ public class ButtonSaveAndQuit : MonoBehaviour
     [SerializeField] private string mainScene;
 
     [Header("CharacterAttributes")]
-    [SerializeField] private AttributesController attributesController; 
+    [SerializeField] private AttributesController attributesController;
 
+    private SaveManager saveManager;
+
+    [Inject] private ICharacterAttributes characterAttributes;
+
+    private void Awake()
+    {
+        saveManager = GetComponent<SaveManager>();
+    }
     private void Start()
     {
         panel.SetActive(false);
@@ -43,13 +53,16 @@ public class ButtonSaveAndQuit : MonoBehaviour
     private void ShowPanel()
     {
         panel.SetActive(true);
+
     }
 
     private void SaveAttributes()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        SceneManager.LoadScene(mainScene);
+        characterAttributes.SaveCharacterData(attributesController.characterAttributesData); // сохранение данных в сериализованном классе
+        saveManager.SaveToFile(FileName.FileNameSlot(), attributesController.characterAttributesData); // сохранение данных в файл
+        Cursor.lockState = CursorLockMode.Locked; // блокировка курсора
+        Cursor.visible = false; // видимость интерфейса
+        SceneManager.LoadScene(mainScene); // загрузка сцены
 
     }
 

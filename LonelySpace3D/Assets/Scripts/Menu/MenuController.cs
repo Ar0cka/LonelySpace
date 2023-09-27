@@ -10,6 +10,7 @@ using Zenject;
 
 public class MenuController : MonoBehaviour
 {
+
     [Header("Scene")]
     [SerializeField] public string _mainScene;
 
@@ -18,7 +19,7 @@ public class MenuController : MonoBehaviour
     private SaveManager saveManager;
 
     [HideInInspector]
-    public string[] slotName = new string[3];
+    public string[] _slotName = new string[3];
 
     #region LoadAndSaveButton
     [Header ("Button menu")]
@@ -37,8 +38,9 @@ public class MenuController : MonoBehaviour
         saveManager = GetComponent<SaveManager>();
         try
         {
-            SlotSavedData slotSavedData = saveManager.LoadToFileSlotData("SlotData.txt");
+            SlotSavedData slotSavedData = saveManager.LoadToFileSlotData("SlotData.txt"); //загрузка слотов из файла
             slotSaved.SaveDataSlot(slotSavedData);
+
             Debug.Log("Slot1 " + slotSaved.slot1Saved + " Slot 2 " + slotSaved.slot2Saved + " Slot 3 " + slotSaved.slot3Saved);
         }
         catch (Exception e)
@@ -56,15 +58,17 @@ public class MenuController : MonoBehaviour
         _panelSave.SetActive(false);
         _panelLoadGame.SetActive(false);
 
-        for (int i = 0; i < slotName.Length; i++)
+        for (int i = 0; i < _slotName.Length; i++)
         {
-            slotName[i] = "Slot" + (i + 1);
+            _slotName[i] = "Slot" + (i + 1) + ".txt"; // создание названий файлов
         }   
+
+        FileName.slotName = _slotName;
     }
 
     private void Update()
     {
-        if (slotSaved.slot1Saved || slotSaved.slot2Saved || slotSaved.slot3Saved) _loadGame.interactable = true;
+        if (slotSaved.slot1Saved || slotSaved.slot2Saved || slotSaved.slot3Saved) _loadGame.interactable = true; // проверка на созданные слоты
     }
 
     #region panelSaveGame

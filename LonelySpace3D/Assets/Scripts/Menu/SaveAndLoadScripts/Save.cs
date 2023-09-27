@@ -48,7 +48,7 @@ public class Save : MonoBehaviour
     private void SaveButtons(int index)
     {
         characterAttributes.BeginAttributes();
-        GameData data = new GameData();
+        CharacterData data = new CharacterData();
         characterAttributes.SaveCharacterData(data);
 
         switch (index)
@@ -56,24 +56,27 @@ public class Save : MonoBehaviour
             case 0:
                 if (!slotSaved.slot1Saved)
                 {
-                    saveManager.SaveToFile(menuController.slotName[0], data);
-                    slotSaved.CheckSlot(menuController.slotName[0]);
+                    saveManager.SaveToFile(menuController._slotName[0], data);
+                    slotSaved.CheckSlot(menuController._slotName[0]);
+                    CurrentSlot.currentSlot = 1;
                     slotSaved.GetTrue(0);
                 }
                 break;
             case 1:
                 if (!slotSaved.slot2Saved)
                 {
-                    saveManager.SaveToFile(menuController.slotName[1], data);
-                    slotSaved.CheckSlot(menuController.slotName[1]);
+                    saveManager.SaveToFile(menuController._slotName[1], data);
+                    slotSaved.CheckSlot(menuController._slotName[1]);
+                    CurrentSlot.currentSlot = 2;
                     slotSaved.GetTrue(1);
                 }
                 break;
             case 2:
                 if (!slotSaved.slot3Saved)
                 {
-                    saveManager.SaveToFile(menuController.slotName[2], data);
-                    slotSaved.CheckSlot(menuController.slotName[2]);
+                    saveManager.SaveToFile(menuController._slotName[2], data);
+                    slotSaved.CheckSlot(menuController._slotName[2]);
+                    CurrentSlot.currentSlot = 3;
                     slotSaved.GetTrue(2);
                 }
                 break;

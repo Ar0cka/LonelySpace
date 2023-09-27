@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
-public class GameData
+public class CharacterData // аттрибуты персонажа
 {
     public int strength;
     public int agility;
@@ -14,7 +16,7 @@ public class GameData
     public int point;
 }
 [System.Serializable]
-public class SlotSavedData
+public class SlotSavedData // слоты 
 {
     public bool slot1Saved;
     public bool slot2Saved;

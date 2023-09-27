@@ -7,15 +7,37 @@ using Zenject;
 
 public class AttributesController : MonoBehaviour
 {
-    [Inject] private ICharacterAttributes characterAttributes;
+    [Inject] private ICharacterAttributes characterAttributes; // inject интерфейс
     #region Serialize
     [Header("TextMeshPro")]
-    [SerializeField] private TextMeshProUGUI[] textAttributes = new TextMeshProUGUI[6];
-    [SerializeField] private TextMeshProUGUI pointQuality;
+    [SerializeField] private TextMeshProUGUI[] textAttributes = new TextMeshProUGUI[6]; //массив цифр, которые указывают на количество определенного атрибута
+    [SerializeField] private TextMeshProUGUI pointQuality; // количество поинтов
     [Header("Buttons")]
-    [SerializeField] private Button[] buttonMines = new Button[6];
-    [SerializeField] private Button[] buttonPlus = new Button[6];
+    [SerializeField] private Button[] buttonMines = new Button[6]; // массив кнопок отвечающих за вычитание атрибута
+    [SerializeField] private Button[] buttonPlus = new Button[6]; // массив кнопок отвечающий за прибавление атрибутов
 
+    [HideInInspector]
+    private SaveManager saveManager; // класс в котором реализованы методы сохранения данных в файле в формате Json
+    [HideInInspector]
+    public CharacterData characterAttributesData; // класс который хранит в себе данные для выгрузки и загрузки данных.
+
+    private void Awake()
+    {
+        saveManager = GetComponent<SaveManager>();
+
+        if (CurrentSlot.currentSlot == 1) // проверка на то, какой слот был включен
+            LoadAttributesFromFile("Slot1.txt");
+
+        else if (CurrentSlot.currentSlot == 2)
+            LoadAttributesFromFile("Slot2.txt");
+
+        else if (CurrentSlot.currentSlot == 3)
+            LoadAttributesFromFile("Slot3.txt");
+
+        else LoadAttributesFromFile("Slot1.txt");
+
+        UpdateUI(); // обновление интерфейса
+    }
 
     #endregion
     #region AddListener and CharacterAttributsInitialize 
@@ -59,16 +81,21 @@ public class AttributesController : MonoBehaviour
     }
     #endregion
     #region Increase and decrease Attributes
-    private void IncreaseAttribute(int index)
+    private void IncreaseAttribute(int index) // прибавление атрибута
     {
             characterAttributes.IncreaseAttribute(index);
             UpdateUI();
     }
 
-    private void DecreaseAttribute(int index)
+    private void DecreaseAttribute(int index) // вычитание аттрибута
     {
             characterAttributes.DecreaseAttribute(index);
             UpdateUI();
     }
     #endregion
+    private void LoadAttributesFromFile(string filePath) // загрузка данных из файла.
+    {
+        characterAttributesData = saveManager.LoadToFile(filePath);
+        characterAttributes.LoadCharacterData(characterAttributesData);
+    }
 }

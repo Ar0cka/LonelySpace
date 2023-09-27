@@ -712,7 +712,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 760604242}
-  - component: {fileID: 760604243}
   m_Layer: 5
   m_Name: SaveAttributes
   m_TagString: Untagged
@@ -742,24 +741,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &760604243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 760604241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b88ea0b549f8e945ae00e9722a283c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 2124165165}
-  showSavePanel: {fileID: 302145861}
-  saveAttributes: {fileID: 262980556}
-  closePanel: {fileID: 1041719422}
-  mainScene: SampleScene
-  attributesController: {fileID: 1239378973}
 --- !u!1 &765488295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,8 +1235,9 @@ GameObject:
   - component: {fileID: 1144248323}
   - component: {fileID: 1144248325}
   - component: {fileID: 1144248324}
-  - component: {fileID: 1144248326}
+  - component: {fileID: 1144248328}
   - component: {fileID: 1144248327}
+  - component: {fileID: 1144248326}
   m_Layer: 5
   m_Name: PanelUpgrade
   m_TagString: Untagged
@@ -1335,7 +1317,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1144248322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8080e04678eaaa0409c0a8dd53282311, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bbf111faeb60f64aacb5680a68e01e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1144248327
@@ -1347,9 +1329,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 1144248322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ffc676062793641b677c90c732b9bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b88ea0b549f8e945ae00e9722a283c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 2124165165}
+  showSavePanel: {fileID: 302145861}
+  saveAttributes: {fileID: 262980556}
+  closePanel: {fileID: 1041719422}
+  mainScene: prologueScene
+  attributesController: {fileID: 1144248328}
+--- !u!114 &1144248328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144248322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 506ec3135310d4d448e88f76b029ee8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textAttributes:
+  - {fileID: 1916299151}
+  - {fileID: 433578115}
+  - {fileID: 2133108733}
+  - {fileID: 1375288044}
+  - {fileID: 953405028}
+  - {fileID: 486262041}
+  pointQuality: {fileID: 1802805891}
+  buttonMines:
+  - {fileID: 1267408328}
+  - {fileID: 93713338}
+  - {fileID: 2053743324}
+  - {fileID: 2126626323}
+  - {fileID: 690737751}
+  - {fileID: 1802037708}
+  buttonPlus:
+  - {fileID: 2101017005}
+  - {fileID: 1212367285}
+  - {fileID: 1442476208}
+  - {fileID: 1150319938}
+  - {fileID: 2002229831}
+  - {fileID: 1294681777}
+  characterAttributesData:
+    strength: 0
+    agility: 0
+    intelligence: 0
+    craft: 0
+    stealth: 0
+    garden: 0
+    point: 0
 --- !u!114 &1150319938 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 115599529034081151, guid: 1f5ede509afb69b4887ef2e4589251ef, type: 3}
@@ -1381,7 +1411,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1239378972}
-  - component: {fileID: 1239378973}
   m_Layer: 5
   m_Name: Attributs
   m_TagString: Untagged
@@ -1415,40 +1444,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1239378973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239378971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 506ec3135310d4d448e88f76b029ee8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textAttributes:
-  - {fileID: 1916299151}
-  - {fileID: 433578115}
-  - {fileID: 2133108733}
-  - {fileID: 1375288044}
-  - {fileID: 953405028}
-  - {fileID: 486262041}
-  pointQuality: {fileID: 1802805891}
-  buttonMines:
-  - {fileID: 1267408328}
-  - {fileID: 93713338}
-  - {fileID: 2053743324}
-  - {fileID: 2126626323}
-  - {fileID: 690737751}
-  - {fileID: 1802037708}
-  buttonPlus:
-  - {fileID: 2101017005}
-  - {fileID: 1212367285}
-  - {fileID: 1442476208}
-  - {fileID: 1150319938}
-  - {fileID: 2002229831}
-  - {fileID: 1294681777}
 --- !u!114 &1267408328 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 115599529373425208, guid: 1f5ede509afb69b4887ef2e4589251ef, type: 3}

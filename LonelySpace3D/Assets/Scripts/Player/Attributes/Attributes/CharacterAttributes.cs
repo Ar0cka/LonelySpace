@@ -22,7 +22,7 @@ public class CharacterAttributes : ICharacterAttributes
 
     public int point { get; set; }
     #endregion
-    public void BeginAttributes()
+    public void BeginAttributes() // обозначение стартовых значений при создании новой игры
     {
         point = 10;
         strength = 2;
@@ -32,8 +32,8 @@ public class CharacterAttributes : ICharacterAttributes
         stealth = 1; 
         garden = 1;
     }
-    #region Increase and decrease Attributes
-    public void IncreaseAttribute(int index)
+    #region Increase and decrease Attributes 
+    public void IncreaseAttribute(int index) // выбор операции в зависимости от нажатой кнопки
     {
         if (point > 0)
         {
@@ -111,7 +111,7 @@ public class CharacterAttributes : ICharacterAttributes
     #endregion
 
     #region SaveAndLoadCharacterData
-    public void SaveCharacterData(GameData characterData)
+    public void SaveCharacterData(CharacterData characterData) // сохранение данных из интерфейса в класс
     {
         characterData.strength = strength;
         characterData.agility = agility;
@@ -121,7 +121,7 @@ public class CharacterAttributes : ICharacterAttributes
         characterData.garden = garden;  
         characterData.point = point;
     }
-    public void LoadCharacterData(GameData characterData)
+    public void LoadCharacterData(CharacterData characterData) // выгрузка данных из класса в интерфейс
     {
         strength = characterData.strength;
         agility = characterData.agility;    

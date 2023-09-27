@@ -41,9 +41,9 @@ public class Load : MonoBehaviour
     {
         switch (index)
         {
-            case 0: saveManager.LoadToFile("Slot1.txt"); break;
-            case 1: saveManager.LoadToFile("Slot2.txt"); break;
-            case 2: saveManager.LoadToFile("Slot3.txt"); break;
+            case 0: saveManager.LoadToFile("Slot1.txt"); CurrentSlot.currentSlot = 1; break; // загрузка файлов в зависимости от нажатой кнопки
+            case 1: saveManager.LoadToFile("Slot2.txt"); CurrentSlot.currentSlot = 2; break;
+            case 2: saveManager.LoadToFile("Slot3.txt"); CurrentSlot.currentSlot = 3; break;
         }
         SceneManager.LoadScene(menuController._mainScene);
     }
