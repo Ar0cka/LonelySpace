@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,8 @@ using UnityEngine.EventSystems;
 
 public class UISlot : MonoBehaviour, IDropHandler
 {
-    public void OnDrop(PointerEventData eventData)
+
+    public virtual void OnDrop(PointerEventData eventData)
     {
         var otherItemTransform = eventData.pointerDrag.transform;
         otherItemTransform.SetParent(transform);

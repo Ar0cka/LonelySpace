@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9c21f1147b2a745bfb0c6db6afa96e, type: 3}
+  m_Name: PepperInfo
+  m_EditorClassIdentifier: 
+  _idName: pepper
+  _title: Pepper
+  _description: RedPepper
+  _maxItemsInInventorySlot: 5
+  _spriteIcon: {fileID: 21300000, guid: 21393e61e6be6764498d38601303b982, type: 3}
