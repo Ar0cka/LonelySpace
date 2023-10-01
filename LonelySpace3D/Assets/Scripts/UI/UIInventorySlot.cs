@@ -23,7 +23,7 @@ public class UIInventorySlot : UISlot
     public override void OnDrop(PointerEventData eventData)
     {
         var otherItemUI = eventData.pointerDrag.GetComponent<UIInventoryItem>();
-        var otherSlotUI = otherItemUI.GetComponent<UIInventorySlot>();
+        var otherSlotUI = otherItemUI.GetComponentInParent<UIInventorySlot>();
 
         var otherSlot = otherSlotUI.slot;
         var inventory = UiInventory.inventory;
