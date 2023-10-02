@@ -4,7 +4,7 @@ using System;
 
 public class InventorySlot : IInventorySlot
 {
-    public bool isFull => amount == capacity; // если isFull больше или равен amount, при этом amount = capacity, тогда true, где capacity - это максимальный объем 
+    public bool isFull => !isEmpty && amount == capacity; // если isFull больше или равен amount, при этом amount = capacity, тогда true, где capacity - это максимальный объем 
 
     public bool isEmpty => item == null; // isEmpty = true тогда, когда item == null;
 
