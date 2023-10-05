@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UpgradeAttributePanel.unity
     guid: 2564ab4d3d16b1941a46f3829f84fd27
+  - enabled: 1
+    path: Assets/Scenes/Inventory.unity
+    guid: d99b2d0eeef1f7a4086f4040df49680d
   m_configObjects: {}

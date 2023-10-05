@@ -30,8 +30,7 @@ public class Generator : MonoBehaviour
         {
             isTrigerZone = false;
             
-        }
-        
+        }  
     }
 
     private void Update()
